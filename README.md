@@ -22,6 +22,7 @@
 
 
 # .gitignore
+We work with sensetive data, your git ignore should look as followed
 
 # Features
 
