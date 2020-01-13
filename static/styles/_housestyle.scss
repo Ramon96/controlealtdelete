@@ -1,0 +1,35 @@
+@function color($value) {
+    @if map-has-key($colors, $value) {
+        @return map-get($colors, $value);
+    }
+
+    @warn "Unused `#{$value}` in $colors";
+    @return null;
+}
+
+$colors: (
+    black: #000,
+    white: #fff,
+    yellow: #fff33d,
+    blue: #0048ff,
+    red: #fc3e46
+);
+
+@font-face{
+    font-family: 'Rubik';
+    src: url('../fonts/Rubik/Rubik-Bold.ttf');
+}
+
+@font-face{
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto/Roboto-Black.ttf');
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Rubik';
+    font-weight: bold;
+}
+
+p{
+    font-family: 'Roboto';
+}

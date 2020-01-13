@@ -1,4 +1,46 @@
+@import 'housestyle';
+
 html, body{
     margin: 0;
+    background: color(black);
+    color: color(white);
+    text-align: center;
+}
 
+#cadlogo{
+    margin: auto;
+    display: block;
+    transform: scale(.8);
+}
+
+#introduction{
+    font-family: 'Roboto';
+    padding:  30px 0;
+    background-image: url('../img/control\ alt\ delete\ achtergrond.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 80px 0;
+}
+
+.yellow-bar{
+    background-color: color(yellow);
+    color: color(black);
+    margin: 0 20%;
+    padding: 30px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    h2{
+        flex: 0 0 100%;
+    }
+    .insight{
+        padding: 0 20px;
+        font-family: 'Roboto';
+        font-size: 30px;
+        p{
+            font-size: 22px;
+            font-weight: 400;
+        }
+    }
 }
