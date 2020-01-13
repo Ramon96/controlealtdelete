@@ -1,0 +1,36 @@
+{
+  "name": "controlealtdelete",
+  "version": "1.0.0",
+  "description": "etnic profiling for controle alt delete",
+  "main": "./scripts/main.js",
+  "dependencies": {
+    "d3": "^5.15.0",
+    "parcel-bundler": "^1.12.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ramon96/controlealtdelete.git"
+  },
+  "keywords": [
+    "etnic",
+    "profiling",
+    "controle",
+    "alt",
+    "delete",
+    "research"
+  ],
+  "author": "Jennifer, Sajjad and Ramon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ramon96/controlealtdelete/issues"
+  },
+  "homepage": "https://github.com/Ramon96/controlealtdelete#readme"
+}
