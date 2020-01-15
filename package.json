@@ -5,7 +5,8 @@
   "main": "./scripts/main.js",
   "dependencies": {
     "d3": "^5.15.0",
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.4",
+    "requirejs": "^2.3.6"
   },
   "devDependencies": {},
   "scripts": {
