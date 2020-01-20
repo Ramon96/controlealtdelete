@@ -8,21 +8,37 @@ import {
 import * as d3 from 'd3';
 
 const rawdata = require('../input/rawdata.json');
+const chartData = cleanChartData(rawdata);
+// console.log(rawdata)
+console.log(chartData);
 
-console.log(rawdata[0].response_ID)
 
+//this function needs the html_ID, a starttime, end time, and a duration
 animateInsight("value1", 0, 25, 5000);
 animateInsight("value2", 0, 50, 5000);
 
-function cleanData(data){
-    return data.map(d => {
-        return {
-            Respodent: data.response_ID
-        }
-    })
+function invalidEntry(value){
+    return value !== "99999";
 }
 
 
+function cleanChartData(data){
+    return data.filter(d => {
+        return d.rapportcijfer !== "99999"
+    }).map(d => {
+        return {
+             Respodent: d.response_ID,
+             Herkomst: d.Herkomst_def,
+             Vetrouwen: d.rapportcijfer,
+             Rondkomen: d.stel_rondkomen
+        }
+    })
+
+}
+
+
+
+//this functions handels the countup on the one page
 function animateInsight(id, start, end, duration){
     let object = document.getElementById(id);
     let range = end - start;
