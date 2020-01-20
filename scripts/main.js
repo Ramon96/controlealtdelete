@@ -22,6 +22,7 @@ function cleanData(data){
     })
 }
 
+
 function animateInsight(id, start, end, duration){
     let object = document.getElementById(id);
     let range = end - start;
