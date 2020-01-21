@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'Rubik';
-  src: url("/14db1d150683e96b73d37372cfd4e3a5.ttf");
+  src: url("/Rubik-Bold.cfd4e3a5.ttf");
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url("/60b9482576b8db29299ee7194f8d7c1e.ttf");
+  src: url("/Roboto-Black.4f8d7c1e.ttf");
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -39,7 +39,7 @@ html, body {
 #introduction {
   font-family: 'Roboto';
   padding: 30px 0;
-  background-image: url("/f181603e33307ad373917620c921af2c.jpg");
+  background-image: url("/control alt delete achtergrond.c921af2c.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

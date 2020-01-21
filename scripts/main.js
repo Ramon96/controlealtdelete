@@ -86,7 +86,8 @@ g.append('g')
     .join('rect')
     .attr('y', d => x1(d.key))
     .attr('x', d => yScale(d))
-    .attr('height', x1.bandwidth())
+    // .attr('height', x1.bandwidth())
+    .attr('height', d => console.log(d))
     .attr('width', d => yScale(d.value) - yScale(0))
     .attr('fill', d => color(d.key));
 
