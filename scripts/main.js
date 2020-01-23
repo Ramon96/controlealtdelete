@@ -5,6 +5,9 @@ import {
     scaleBand
 } from 'd3';
 import * as d3 from 'd3';
+import d3Tip from 'd3-tip';
+d3.tip = d3Tip;
+
 const svg = d3.select(".barChart");
 const bar = svg.append("g");
 const rawdata = require('../input/rawdata.json');
@@ -24,7 +27,7 @@ function sortNumber(a, b) {
 const bar_x0 = d3.scaleBand()
     .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     .rangeRound([margin.left, width - margin.right])
-    .paddingInner(0.1)
+    .paddingInner(0.5)
 
 const bar_x1 = d3.scaleBand()
         .domain(keys)
@@ -38,12 +41,13 @@ const y2 = d3.scaleLinear()
 const xAxis = g => g
     .attr("transform", `translate(0,${height - margin.bottom})`)
     .call(d3.axisBottom(bar_x0).tickSizeOuter(0))
-    .call(g => g.select(".domain").remove())
+    // .call(g => g.select(".domain").remove())
 
 const yAxis = g => g
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y2).ticks(null, "s"))
-        .call(g => g.select(".domain").remove())
+        // .call(d3.axisLeft(y2))
+        // .call(g => g.select(".domain").remove())
         .call(g => g.selectAll(".tick text").clone()
             .attr("text-anchor", "start")
             .attr("font-weight", "bold"))
@@ -53,6 +57,20 @@ const yAxis = g => g
     restructureData(chartData)
 
     function update(data){
+        const datapointToolTip = d3.tip().attr('class', 'd3-tip').html(function (d) {
+            const returnValue = d.percentage;
+
+                if(d.herkomst == "Westers"){
+                    d3.selectAll('.d3-tip')
+                    .attr("id", "red")    
+                }
+                else{
+                    d3.selectAll('.d3-tip')
+                    .attr("id", "blue")
+                }
+            return returnValue;
+          });
+
         const rects = bar.selectAll("rect");
         rects.data(data)
                 .attr("transform", d => `translate(${bar_x0(d[groupKey])},0)`)
@@ -75,6 +93,8 @@ const yAxis = g => g
             .attr("y", d => y2(d.percentage))
                 .attr("height", d => y2(0) - y2(d.percentage))
                 .attr("fill", d => color(d.herkomst))
+                .on('mouseenter', datapointToolTip.show)
+                .on('mouseleave', datapointToolTip.hide)
 
         rects.data(data).exit().remove();
 
@@ -96,6 +116,8 @@ const yAxis = g => g
             .call(xAxis);
         svg.append("g")
             .call(yAxis);
+
+            svg.call(datapointToolTip)
 
 }
     const legend = svg => {
@@ -231,7 +253,9 @@ var z = d3.scaleOrdinal()
 
 console.log("je moeder")
 
-d3.csv("../input/data.csv", function(d, i, columns) {
+const dataurl = "https://gist.githubusercontent.com/Ramon96/31f2e29dc60cc4e27407cdb1b4546920/raw/3192bbac8291ceee5181699c46a56ef46ca36007/data.csv";
+
+d3.csv(dataurl, function(d, i, columns) {
 for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = +d[columns[i]];
 return d;
 }).then(function(data) {
