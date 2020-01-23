@@ -145,5 +145,5 @@ Ook wil ik graag [Tomas](https://github.com/TomasS666) bedanken. Zonder hem zou 
 Jennifer Slagt ,Sajjad Ali en Ramon Meijers
 
 # License
-[MIT @ Ramon Meijers](https://github.com/Ramon96/frontend-data/blob/master/LICENSE)
+[MIT @ Ramon Meijers](https://github.com/Ramon96/controlealtdelete/blob/master/LICENSE)
 
