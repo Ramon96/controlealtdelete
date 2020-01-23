@@ -110,6 +110,13 @@ Ik maak een groep met westerse en een groep met niet westerse en die geef ik het
 omdat het vetrouwens cijfer 1 - 10 is krijg ik 20 resultaten terug (10 westerse en 10 niet westerse)
 Dit kan ik vervolgends in mijn kaart plotten.
 
+## Dit is hoe Jennifer de data heeft toegepast: 
+De gebruikte data afkomstig van twee variabelen: de hoogst afgeronde opleiding van respondenten en het contact verloop tussen de politie en de respondenten die gebaseerd is op beleefdheid.
+Op de y-as staat het aantal respondenten in percentages. De data is dus relatief, waardoor je eerlijke vergelijkingen kan maken. Op de x-as staan antwoorden die respondenten kunnen geven op de uitspraak: "De politie was beleefd gedurende het contact". Elk antwoord hierop vormt dus een groep die uit meerdere bars bestaan.
+Elke bar is een opleidingsniveau waarbij elke een bepaalde kleur heeft. In de legenda kan de gebruiker dit bekijken en hierop filteren.
+Om de datavisualisatie te realiseren met D3.js, heb ik een voorbeeld gevonden op blocks.org. Hierbij heb ik de code aangepast.
+Om de data in de laden, heb ik een aparte file gemaakt die "data.csv" heet. Hier heb ik de data handmatig ingezet. Deze heb ik vervolgens met D3 ingeladen.
+
 # Proces & Design Rationale
 Ons proces en De design rationalen zijn online terug te vinden.
 [Proces en design rationale](https://jennifer98-s.gitbook.io/cntrl-alt-delete/)
