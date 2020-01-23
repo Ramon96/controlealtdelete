@@ -5,52 +5,46 @@ import {
     scaleBand
 } from 'd3';
 import * as d3 from 'd3';
+const svg = d3.select("#barChart");
+const bar = svg.append("g");
 const rawdata = require('../input/rawdata.json');
 const chartData = cleanChartData(rawdata);
-
+// const groupedData = restructureData(chartData);
 console.log('chartskie: ', chartData);
-
-
-const svg = d3.select("#barChart");
 const margin = ({top: 10, right: 10, bottom: 20, left: 40})
 const height = 600;
 const width= 960;
-
-
 const keys = ["westers", "niet-westers"];
-const groupKey = 'Vetrouwen';
-
+const groupKey = 'vertrouwen';
 const color = d3.scaleOrdinal()
 .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
-
-
+function sortNumber(a, b) {
+  return a - b;
+}
 const x0 = d3.scaleBand()
-    .domain(chartData.map(d => d[groupKey]))
+    // .domain(groupedData.map(d => d[groupKey]).sort(sortNumber))
+    .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     .rangeRound([margin.left, width - margin.right])
     .paddingInner(0.1)
-
     // console.log(x0(10))
-
 const x1 = d3.scaleBand()
         .domain(keys)
         .rangeRound([0, x0.bandwidth()])
         .padding(0.05)
-
+// const y = d3.scaleLinear()
+//     .domain([0, 35]).nice()
+//     // .domain([0, 100]).nice()
+//     .rangeRound([height - margin.bottom, margin.top])
+//     // .rangeRound([height - margin.bottom, margin.top])
 const y = d3.scaleLinear()
-    // .domain([0, d3.max(chartData, d => d3.max(keys, key => d[key]))]).nice()
-    .domain([0, 100]).nice()
-    .rangeRound([height - margin.bottom, margin.top])
-    // .rangeRound([height - margin.bottom, margin.top])
-
-
-
-    console.log(y(50))
-
+// .domain([0, d3.max(data, d => d.percentage)]).nice()
+.domain([0, 100]).nice()
+.rangeRound([height - margin.bottom, margin.top])
+    console.log(y(4))
 const xAxis = g => g
     .attr("transform", `translate(0,${height - margin.bottom})`)
     .call(d3.axisBottom(x0).tickSizeOuter(0))
     .call(g => g.select(".domain").remove())
-
 const yAxis = g => g
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y).ticks(null, "s"))
@@ -59,46 +53,46 @@ const yAxis = g => g
             .attr("x", 3)
             .attr("text-anchor", "start")
             .attr("font-weight", "bold")
-            .text(chartData.y))
-
-    svg.append("g")
-    .selectAll("g")
-    .data(chartData)
-    .join("g")
-    .attr("transform", d => `translate(${x0(d[groupKey])},0)`)
-    .selectAll("rect")
-    .data(d => keys.map(key => {
-        // console.log(key)
-        return ({key, value: d["Herkomst"]})
-    })
-    )
-    .join("rect")
-    .attr("x", d => x1(d.key))
-    // .attr("x", d => { 
-    //   //  console.log(d)
-    //    return  x1(d.key)
-    //     })
-    // .attr("y", d => console.log(d))
-    .attr("y", d => y(50))
-    // .attr("y", d => console.log(y(d.value)))
-    .attr("width", x1.bandwidth())
-    // .attr("height", d => console.log(y(0)))
-    // .attr("height", d => console.log(d.value))
-    // Het probleem is dat ik op de Y as de bar wil plotten, ik kijk nu tussen de positie 0 en d.value maar d.value staat gelijk aan westers en niet-westers
-    .transition()
-    .delay(10)
-    .duration(700)
-    .ease(d3.easeQuadOut)
-    .attr("height", d => y(0) - y(50)) 
-    // .attr("height", d => console.log(d.value))
-    .attr("fill", d => color(d.key));
-
-svg.append("g")
-    .call(xAxis);
-
-svg.append("g")
-    .call(yAxis);
-
+            .text('%'));
+    // g.selectAll("g")
+    restructureData(chartData)
+    function update(data){
+        const rects = bar.selectAll("rect");
+        rects.data(data).attr("transform", d => `translate(${x0(d[groupKey])},0)`)
+                .attr("x", d => x1(d.herkomst))
+                .attr("y", d => y(d.percentage))
+                .attr("width", x1.bandwidth())
+                .attr("height", d => y(0) - y(d.percentage))
+                .attr("fill", d => color(d.herkomst));
+        rects.data(data)
+            .enter().append('rect')  
+                .attr("transform", d => `translate(${x0(d[groupKey])},0)`)
+                .attr("x", d => x1(d.herkomst))
+                .attr("y", d => y(d.percentage))
+                .attr("data-percentage", d => d.percentage)
+                .attr("width", x1.bandwidth())
+                .attr("height", d => y(0) - y(d.percentage))
+                .attr("fill", d => color(d.herkomst));
+        rects.data(data).exit().remove();
+        const menu = d3.select('nav');
+        menu.on("click", ()=>{
+            console.log(event.target.dataset.finance)
+            if(event.target.dataset.finance == 7){
+                restructureData(chartData);
+            }
+            else{
+                const temp = chartData.filter(obj => {
+                      return  event.target.dataset.finance == obj.Rondkomen;
+                  })
+                
+                  restructureData(temp)
+            }
+        })
+        svg.append("g")
+            .call(xAxis);
+        svg.append("g")
+            .call(yAxis);
+}
     const legend = svg => {
         const g = svg
             .attr("transform", `translate(${width},0)`)
@@ -110,13 +104,11 @@ svg.append("g")
           .data(color.domain().slice().reverse())
           .join("g")
             .attr("transform", (d, i) => `translate(0,${i * 20})`);
-      
         g.append("rect")
             .attr("x", -19)
             .attr("width", 19)
             .attr("height", 19)
             .attr("fill", color);
-      
         g.append("text")
             .attr("x", -24)
             .attr("y", 9.5)
@@ -125,31 +117,50 @@ svg.append("g")
       }
     svg.append("g")
     .call(legend);
-
-    
-    
     //this function needs the html_ID, a starttime, end time, and a duration
-    animateInsight("value1", 0, 25, 5000);
-    animateInsight("value2", 0, 50, 5000);
-
+   // animateInsight("value1", 0, 25, 5000);
+   // animateInsight("value2", 0, 50, 5000);
     function restructureData(data){
         const sortOrigin = d3.nest()
             .key(d => d.Herkomst)
             .entries(data)
-
-        const trustByOrigin = d3.nest()
+            console.log(sortOrigin)
+        const trustByOriginWestern = d3.nest()
             .key(d => d.Vetrouwen)
-            .entries(data)
-
-
+            .entries(sortOrigin[0].values);
+        const trustByOriginNonWestern = d3.nest()
+            .key(d => d.Vetrouwen)
+            .entries(sortOrigin[1].values);
+        const objectsW = trustByOriginWestern.map(obj => {
+            return {
+                herkomst: 'Westers',
+                percentage: Math.ceil((100 / sortOrigin[0].values.length) * obj.values.length),
+                groeplengte: obj.values.length,
+                vertrouwen: obj.key
+            }
+        })
+        const objectsN = trustByOriginNonWestern.map(obj => {
+            return {     
+                herkomst: 'niet-westers',
+                percentage: Math.ceil((100 / sortOrigin[1].values.length) * obj.values.length),
+                groeplengte: obj.values.length,
+                vertrouwen: obj.key
+            }
+        })
+        const newData = [...objectsW, ...objectsN];
+        // sortOrigin.forEach(array => {
+        //     newData.forEach(obj =>{
+        //         obj.Herkomst == array.key
+        //     })
+        // })
+        console.log(sortOrigin) 
+        update(newData);
+        // return newData;
     }
-
-    console.log(restructureData(chartData))
-
+    // console.log(restructureData(chartData))
 // westers : 1, 6
 // niet westers :  2 ,3 4 ,5 ,7 
 // weg : 8
-
 // This function checks the origin of the induvidual 1 or 6 is western anything else is non western
 function ancestry(origin){
     if(origin == "1" || origin == "6"){
@@ -159,7 +170,6 @@ function ancestry(origin){
         return "niet-westers"
     }
 }
-
 function cleanChartData(data){
     return data.filter(d => {
         return  d.rapportcijfer != "99999" 
@@ -174,7 +184,6 @@ function cleanChartData(data){
         }
     })
 }
-
 //this functions handels the countup on the one page
 function animateInsight(id, start, end, duration){
     let object = document.getElementById(id);
