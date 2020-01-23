@@ -10,37 +10,31 @@ const bar = svg.append("g");
 const rawdata = require('../input/rawdata.json');
 const chartData = cleanChartData(rawdata);
 // const groupedData = restructureData(chartData);
-console.log('chartskie: ', chartData);
+
 const margin = ({top: 10, right: 10, bottom: 20, left: 40})
 const height = 600;
 const width= 960;
 const keys = ["westers", "niet-westers"];
 const groupKey = 'vertrouwen';
 const color = d3.scaleOrdinal()
-.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
+.range(["#db393c", "#0f4ff4"])
 function sortNumber(a, b) {
   return a - b;
 }
 const x0 = d3.scaleBand()
-    // .domain(groupedData.map(d => d[groupKey]).sort(sortNumber))
     .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     .rangeRound([margin.left, width - margin.right])
     .paddingInner(0.1)
-    // console.log(x0(10))
+
 const x1 = d3.scaleBand()
         .domain(keys)
         .rangeRound([0, x0.bandwidth()])
         .padding(0.05)
-// const y = d3.scaleLinear()
-//     .domain([0, 35]).nice()
-//     // .domain([0, 100]).nice()
-//     .rangeRound([height - margin.bottom, margin.top])
-//     // .rangeRound([height - margin.bottom, margin.top])
+
 const y = d3.scaleLinear()
-// .domain([0, d3.max(data, d => d.percentage)]).nice()
 .domain([0, 100]).nice()
 .rangeRound([height - margin.bottom, margin.top])
-    console.log(y(4))
+
 const xAxis = g => g
     .attr("transform", `translate(0,${height - margin.bottom})`)
     .call(d3.axisBottom(x0).tickSizeOuter(0))
@@ -49,31 +43,36 @@ const yAxis = g => g
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y).ticks(null, "s"))
         .call(g => g.select(".domain").remove())
-        .call(g => g.select(".tick:last-of-type text").clone()
-            .attr("x", 3)
+        .call(g => g.selectAll(".tick text").clone()
             .attr("text-anchor", "start")
-            .attr("font-weight", "bold")
-            .text('%'));
-    // g.selectAll("g")
+            .attr("font-weight", "bold"));
+            
     restructureData(chartData)
+
     function update(data){
         const rects = bar.selectAll("rect");
         rects.data(data).attr("transform", d => `translate(${x0(d[groupKey])},0)`)
                 .attr("x", d => x1(d.herkomst))
-                .attr("y", d => y(d.percentage))
                 .attr("width", x1.bandwidth())
-                .attr("height", d => y(0) - y(d.percentage))
-                .attr("fill", d => color(d.herkomst));
+                .attr("fill", d => color(d.herkomst))
+                .transition()
+                .delay((d, i) => {return i * 1})
+                .duration(700)
+                .ease(d3.easeQuadOut)
+                .attr("y", d => y(d.percentage))
+                .attr("height", d => y(0) - y(d.percentage));
         rects.data(data)
             .enter().append('rect')  
-                .attr("transform", d => `translate(${x0(d[groupKey])},0)`)
-                .attr("x", d => x1(d.herkomst))
-                .attr("y", d => y(d.percentage))
-                .attr("data-percentage", d => d.percentage)
-                .attr("width", x1.bandwidth())
+            .attr("transform", d => `translate(${x0(d[groupKey])},0)`)
+            .attr("x", d => x1(d.herkomst))
+            .attr("data-percentage", d => d.percentage)
+            .attr("width", x1.bandwidth())
+            .attr("y", d => y(d.percentage))
                 .attr("height", d => y(0) - y(d.percentage))
                 .attr("fill", d => color(d.herkomst));
+
         rects.data(data).exit().remove();
+
         const menu = d3.select('nav');
         menu.on("click", ()=>{
             console.log(event.target.dataset.finance)
@@ -117,9 +116,6 @@ const yAxis = g => g
       }
     svg.append("g")
     .call(legend);
-    //this function needs the html_ID, a starttime, end time, and a duration
-   // animateInsight("value1", 0, 25, 5000);
-   // animateInsight("value2", 0, 50, 5000);
     function restructureData(data){
         const sortOrigin = d3.nest()
             .key(d => d.Herkomst)
@@ -148,16 +144,11 @@ const yAxis = g => g
             }
         })
         const newData = [...objectsW, ...objectsN];
-        // sortOrigin.forEach(array => {
-        //     newData.forEach(obj =>{
-        //         obj.Herkomst == array.key
-        //     })
-        // })
-        console.log(sortOrigin) 
+
         update(newData);
         // return newData;
     }
-    // console.log(restructureData(chartData))
+
 // westers : 1, 6
 // niet westers :  2 ,3 4 ,5 ,7 
 // weg : 8
