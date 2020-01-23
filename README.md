@@ -4,7 +4,7 @@
 _hier komt een demo video_
 
 # link to live demo
-[Demo]('https://controlealtdelete.netlify.com/)'
+[Demo](https://controlealtdelete.netlify.com/)
 
 # Controle alt Delete
 Controle alt delete doet onderzoek naar etnisch profilering. 
@@ -35,7 +35,7 @@ Je kunt het project terug zien op
 
 # Proces & Design Rationale
 Ons proces en De design rationalen zijn online terug te vinden.
-[Proces en design rationale]('https://jennifer98-s.gitbook.io/cntrl-alt-delete/')
+[Proces en design rationale](https://jennifer98-s.gitbook.io/cntrl-alt-delete/)
 
 # Bronnen
 Voorbeeld van mike bostock is als inspiratie bron gebruikt bij het maken van de eerste chart. 
@@ -46,9 +46,9 @@ Dit is gebruikt bij het maken van de 2de chart.
 https://bl.ocks.org/63anp3ca/6bafeb64181d87750dbdba78f8678715
 
 # Credits
-Ik wil graag [Nick]('https://github.com/CountNick') bedanken, hij heeft me op de goede weg geholpen. Hij heeft ook veel van zijn vrije tijd opgeofferd om mij te helpen met debuggen om me d3 wat beter te helpen te begrijpen.
+Ik wil graag [Nick](https://github.com/CountNick) bedanken, hij heeft me op de goede weg geholpen. Hij heeft ook veel van zijn vrije tijd opgeofferd om mij te helpen met debuggen om me d3 wat beter te helpen te begrijpen.
  
-Ook wil ik graag [Tomas]('https://github.com/TomasS666') bedanken. Zonder hem zou het niet gelukt zijn. Tomas heeft me ontzettend veel bijgeleerd op het gebied van nesten in d3 en vergelijkingen binnen d3 tegenelkaar op kan zetten. Hij heeft me geholpen waar ik niet uit kon komen en heeft een ook flink wat tijd van z'n dag in me gestoken.
+Ook wil ik graag [Tomas](https://github.com/TomasS666) bedanken. Zonder hem zou het niet gelukt zijn. Tomas heeft me ontzettend veel bijgeleerd op het gebied van nesten in d3 en vergelijkingen binnen d3 tegenelkaar op kan zetten. Hij heeft me geholpen waar ik niet uit kon komen en heeft een ook flink wat tijd van z'n dag in me gestoken.
 
 # Team
 Jennifer Slagt
