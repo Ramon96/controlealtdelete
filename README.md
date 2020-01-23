@@ -32,6 +32,83 @@ Je kunt het project terug zien op
 `localhost:1234`
 
 # Data
+Om de data te kunnen gebruiken heb ik de excel bestand in een online converter gestopt (Excel > Json)
+Op advies van Joan. Om de data in te laden heb ik gebruik gemaakt van require.js
+Vervolgends heb ik de data opgeschoond.
+
+```javascript 
+function cleanChartData(data){
+    return data.filter(d => {
+        return  d.rapportcijfer != "99999" 
+    }).filter(d => {
+        return d.Herkomst_def != '8'
+    }).map(d => {
+        return {
+             Respodent: d.response_ID,
+             Herkomst: ancestry(d.Herkomst_def),
+             Vetrouwen: d.rapportcijfer,
+             Rondkomen: d.stel_rondkomen
+        }
+    })
+}
+```
+Met de fucntie hierboven haal ik de vuile data eruit en halen de we respodenten eruit die niet hun herkomst hebben opgegeven.
+
+```javascript
+function ancestry(origin){
+    if(origin == "1" || origin == "6"){
+        return "westers"
+    }
+    else{
+        return "niet-westers"
+    }
+}
+```
+Met de functie hierboven zet ik de westerse bevolking en de nederlands onder de categorie westers, en alle niet westerse bevolking in de categorie niet-westers.
+
+Vevolgends nest ik de data op basis van migratie achtergrond met de volgende functie
+```javascript
+    function restructureData(data){
+        const sortOrigin = d3.nest()
+            .key(d => d.Herkomst)
+            .entries(data)
+            
+        const trustByOriginWestern = d3.nest()
+            .key(d => d.Vetrouwen)
+            .entries(sortOrigin[0].values);
+            
+        const trustByOriginNonWestern = d3.nest()
+            .key(d => d.Vetrouwen)
+            .entries(sortOrigin[1].values);
+            
+        const objectsW = trustByOriginWestern.map(obj => {
+            return {
+                herkomst: 'Westers',
+                percentage: Math.ceil((100 / sortOrigin[0].values.length) * obj.values.length),
+                groeplengte: obj.values.length,
+                vertrouwen: obj.key
+            }
+        })
+        
+        const objectsN = trustByOriginNonWestern.map(obj => {
+            return {     
+                herkomst: 'niet-westers',
+                percentage: Math.ceil((100 / sortOrigin[1].values.length) * obj.values.length),
+                groeplengte: obj.values.length,
+                vertrouwen: obj.key
+            }
+        })
+        
+        const newData = [...objectsW, ...objectsN];
+
+        update(newData);
+        // return newData;
+    }
+```
+Ik maak een groep met westerse en een groep met niet westerse en die geef ik het vetrouwen mee en ik reken hoe groot de percentage is van de groep. 
+
+omdat het vetrouwens cijfer 1 - 10 is krijg ik 20 resultaten terug (10 westerse en 10 niet westerse)
+Dit kan ik vervolgends in mijn kaart plotten.
 
 # Proces & Design Rationale
 Ons proces en De design rationalen zijn online terug te vinden.
@@ -41,6 +118,7 @@ Ons proces en De design rationalen zijn online terug te vinden.
 * parcel.js
 * d3.js
 * d3-tip
+* require.js
 * Data van Controle alt delete
 
 # Bronnen
