@@ -37,6 +37,12 @@ Je kunt het project terug zien op
 Ons proces en De design rationalen zijn online terug te vinden.
 [Proces en design rationale](https://jennifer98-s.gitbook.io/cntrl-alt-delete/)
 
+# Gebruikte tools
+* parcel.js
+* d3.js
+* d3-tip
+* Data van Controle alt delete
+
 # Bronnen
 Voorbeeld van mike bostock is als inspiratie bron gebruikt bij het maken van de eerste chart. 
 Het is niet overgenomen maar er zijn wel elementen nagemaakt. 
