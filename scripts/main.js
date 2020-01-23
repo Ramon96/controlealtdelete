@@ -32,13 +32,14 @@ const x1 = d3.scaleBand()
         .padding(0.05)
 
 const y = d3.scaleLinear()
-.domain([0, 100]).nice()
-.rangeRound([height - margin.bottom, margin.top])
+    .domain([0, 100]).nice()
+    .rangeRound([height - margin.bottom, margin.top])
 
 const xAxis = g => g
     .attr("transform", `translate(0,${height - margin.bottom})`)
     .call(d3.axisBottom(x0).tickSizeOuter(0))
     .call(g => g.select(".domain").remove())
+
 const yAxis = g => g
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y).ticks(null, "s"))
@@ -51,7 +52,8 @@ const yAxis = g => g
 
     function update(data){
         const rects = bar.selectAll("rect");
-        rects.data(data).attr("transform", d => `translate(${x0(d[groupKey])},0)`)
+        rects.data(data)
+                .attr("transform", d => `translate(${x0(d[groupKey])},0)`)
                 .attr("x", d => x1(d.herkomst))
                 .attr("width", x1.bandwidth())
                 .attr("fill", d => color(d.herkomst))
