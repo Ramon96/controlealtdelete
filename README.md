@@ -51,9 +51,7 @@ Ik wil graag [Nick](https://github.com/CountNick) bedanken, hij heeft me op de g
 Ook wil ik graag [Tomas](https://github.com/TomasS666) bedanken. Zonder hem zou het niet gelukt zijn. Tomas heeft me ontzettend veel bijgeleerd op het gebied van nesten in d3 en vergelijkingen binnen d3 tegenelkaar op kan zetten. Hij heeft me geholpen waar ik niet uit kon komen en heeft een ook flink wat tijd van z'n dag in me gestoken.
 
 # Team
-Jennifer Slagt
-Sajjad Ali
-Ramon Meijers
+Jennifer Slagt ,Sajjad Ali en Ramon Meijers
 
 # License
 [MIT @ Ramon Meijers](https://github.com/Ramon96/frontend-data/blob/master/LICENSE)
