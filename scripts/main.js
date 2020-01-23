@@ -5,7 +5,7 @@ import {
     scaleBand
 } from 'd3';
 import * as d3 from 'd3';
-const svg = d3.select("#barChart");
+const svg = d3.select(".barChart");
 const bar = svg.append("g");
 const rawdata = require('../input/rawdata.json');
 const chartData = cleanChartData(rawdata);
