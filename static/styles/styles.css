@@ -194,6 +194,7 @@ footer {
   content: "\25BC";
   position: absolute;
   text-align: center;
+  font-family: "Roboto";
 }
 
 /* Style northward tooltips differently */

@@ -61,7 +61,7 @@ const yAxis = g => g
 
     function update(data){
         const datapointToolTip = d3.tip().attr('class', 'd3-tip').html(function (d) {
-            const returnValue = d.percentage;
+            const returnValue = d.percentage + "%";
 
                 if(d.herkomst == "Westers"){
                     d3.selectAll('.d3-tip')
@@ -150,14 +150,14 @@ const yAxis = g => g
             .attr("dy", "0.35em")
             .text(d => d);
       }
-        svg.append("g")
-            .call(legend);
+        // svg.append("g")
+        //     .call(legend);
 
     function restructureData(data){
         const sortOrigin = d3.nest()
             .key(d => d.Herkomst)
             .entries(data)
-            console.log(sortOrigin)
+            // console.log(sortOrigin)
         const trustByOriginWestern = d3.nest()
             .key(d => d.Vetrouwen)
             .entries(sortOrigin[0].values);
@@ -264,9 +264,9 @@ var column_y = d3.scaleLinear()
 .rangeRound([height2, 0]);
 
 var z = d3.scaleOrdinal()
-.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+.range(["#5f7eff","#0048ff" , "#3e3dca", "#6e35a1", "#972e7e", "#bf275b", "#ee1f33"]);
 
-console.log("je moeder")
+
 
 const dataurl = "https://gist.githubusercontent.com/Ramon96/31f2e29dc60cc4e27407cdb1b4546920/raw/3192bbac8291ceee5181699c46a56ef46ca36007/data.csv";
 
@@ -274,12 +274,12 @@ d3.csv(dataurl, function(d, i, columns) {
 for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = +d[columns[i]];
 return d;
 }).then(function(data) {
-console.log(data);
+// console.log(data);
 
 var keys = data.columns.slice(1);
 
-console.log('keys');
-console.log(keys);
+// console.log('keys');
+// console.log(keys);
 column_x0.domain(data.map(function(d) { return d.State; }));
 column_x1.domain(keys).rangeRound([0, column_x0.bandwidth()]);
 column_y.domain([0, d3.max(data, function(d) { return d3.max(keys, function(key) { return d[key]; }); })]).nice();
