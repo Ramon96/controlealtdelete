@@ -101,7 +101,7 @@ footer {
   margin-top: 5%;
 }
 
-#leftLabel {
+.leftLabel {
   position: absolute;
   fill: #fff;
   -webkit-transform: translate(15px, 70%) rotate(-90deg);
