@@ -12,26 +12,54 @@ html, body{
     margin: auto;
     display: block;
     transform: scale(.8);
+    padding: 30px 0;
+}
+
+#amsterdamLogo{
+
+    left: 50%;
+    transform: translate(-50%, -20%) scale(.5);
+    position: relative;
 }
 
 #introduction{
     font-family: 'Roboto';
-    padding:  30px 0;
     background-image: url('../img/control\ alt\ delete\ achtergrond.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    margin: 80px 0;
+    height: 80vh;
 }
 
 .yellow-bar{
-    background-color: color(yellow);
-    color: color(black);
+    background-color: #fbea6a;
+    color:black;
+    margin: 0 20%;
+    padding: 40px 50px;
+    font-family: 'Roboto';
+    font-size: 20px;
+    text-align: left;
+    transform: translateY(-20%);
+    .invert{
+        background-color: black;
+        color: #fbea6a;
+        padding: 2px;
+    }
+}
+
+.black-bar{
+    background-color: color(black);
+    color: color(white);
     margin: 0 20%;
     padding: 30px 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    &.yellow-text{
+        .insight{
+        color:#fbea6a;
+    }
+    }
     h2{
         flex: 0 0 100%;
     }
@@ -43,7 +71,26 @@ html, body{
             font-size: 22px;
             font-weight: 400;
         }
+        div{
+            font-size: 60px;
+        }
+    }
+
+    #value1{
+        color: #ee1f33
+    }
+    #value2{
+        color: #0048ff;
+    }
+
+    #valRed{
+        color: #ee1f33
+    }
+    #valBlue{
+        color: #0048ff;
     }
 }
+
+
 
 

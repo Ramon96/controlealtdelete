@@ -1,3 +1,70 @@
+.visualisation{
+    text-align: left;
+    display: block;
+    margin: auto;
+    max-width: 50%;
+}
+
+#barWrap{
+    width: 100%;
+    .barChart{
+        position: relative;
+        margin-top: 5%;
+    }
+}
+
+#leftLabel{
+    position: absolute;
+    fill: #fff;
+    transform: translate(15px,70%) rotate(-90deg);
+    font-size: 22px;
+    font-family: "Roboto";
+}
+
+.bottomLabel{
+    font-size: 22px;
+    font-family: "Roboto";
+    margin: 0;
+}
+
+#barChartLegend{
+    display: flex;
+    width: 70%;
+    justify-content: space-evenly;
+    font-family: "Roboto-light";
+    margin: auto;
+    padding-top: 20px;
+    div{
+        padding: 0 10px;
+        position: relative;
+    }
+
+    #leftLegend{
+        color: #db393c;
+        &::before{
+            content: "";
+            width: 20px;
+            height: 20px;  
+            background: #db393c;
+            position: absolute;
+            left: -20px;
+            border-radius: 2px;
+        }
+    }
+    #rightLegend{
+        color: #0f4ff4;
+        &::before{
+            content: "";
+            width: 20px;
+            height: 20px;  
+            background: #0f4ff4;
+            position: absolute;
+            left: -20px;
+            border-radius: 2px;
+        }
+    }
+}
+
 .axis path,
 .axis line {
   fill: none;
@@ -65,3 +132,15 @@ rect:hover{
     opacity: .7;
     cursor: pointer;
 }
+
+.tick{
+    font-size: 20px;
+    font-family: "Roboto";
+}
+
+.columnChart{
+
+        font-size: 15px;
+
+}
+

@@ -10,29 +10,42 @@
 </head>
 
 <body>
-    <img id="cadlogo" src="static/img/cadlogo.png">
     <div id="introduction">
-        <h1>Hier komt een leuke titel</h1>
-        <h2>En hier komt een leuke subtitel</h2>
-        <!-- TODO: vervang dit voor een fatsoenlijk logo -->
-        x <br>
-        x <br>
-        x
+        <img id="cadlogo" src="static/img/cadlogo.png">
+        <div class="centerCenter">
+            <p>Onderzoek: </p>
+            <h1>Controles op basis van uiterlijke kenmerken in plaats van verdacht gedrag. Gebeurt dit in Amsterdam?</h1>
+            <p>Bekijk hier de interessante inzichten die uit het onderzoek gebleken zijn.</p>
+            <img id="amsterdamLogo" src="static/img/Amsterdam logo.png">
+        </div>
     </div>
+  
     <div class="yellow-bar">
-        <h2>Bepaalde verhoudingen in percentages</h2>
+            We hebben in samenwerking met Controle Alt Delete twee diverse datavisualisaties ontworpen die inzicht geven over hun onderzoek. Dit onderzoek is uitgevoerd in Amsterdam en bestaat uit een vragenlijst over etnisch profileren door de politie. Hoe groot is dit probleem eigenlijk?
+            <br>
+            <br>
+            Deze is door maar liefst <span class="invert">1935 respondenten</span> ingevuld!
+            <br>
+            <br>            
+            Staat de migratieachtergrond van respondenten in correlatie met hun vertrouwen in de politie? Verloopt het contact beleefd of staat dit in correlatie met het opleidingsniveau? Wij proberen hier meer inzicht over te geven met behulp van onze datavisualisaties.
+    </div>
+  
+    <div class="black-bar">
+        <h2>Hoeveel respondenten geven in verhouding een <span class="underline">onvoldoende</span> cijfer aan het vertrouwen in de politie?</h2>
         <div class="insight">
             <div id="value1">0%</div>
-            <p>Korte beschrijving</p>
+            <p id="valRed">Met een westerse migratieachtergrond</p>
         </div>
         <div class="insight">
-                <div id="value2">0%</div>
-                <p>Korte beschrijving</p>
+            <div id="value2">0%</div>
+            <p id="valBlue">Met een niet-westerse migratieachtergrond</p>
         </div>
     </div>
-    <div id="visualisation">
-        <h2>Hier komt de titel van de data vis</h2>
-        <h3>Hier komt de subtitel vand de data vis</h3>
+
+
+    <div class="visualisation">
+        <h2>Correlatie tussen migratieachtergrond en financiële situatie</h2>
+        <p class="softIta">Het cijfer geeft het vertrouwen in de politie in Amsterdam aan. Kan dit beinvloedt worden door de migratieachtergrond en de financiële situatie</p>
     </div>
     <nav>
         <button data-finance="1">Helemaal oneens</button>
@@ -41,10 +54,41 @@
         <button data-finance="4">Mee eens</button>
         <button data-finance="5">Helemaal mee eens</button>
         <button data-finance="6">Geen antwoord</button>
-        <button data-finance="7">Alles</button>
+        <button id="active" data-finance="7">Alles</button>
     </nav>
-    <svg width="960" height="600" class="barChart"></svg>
-    <svg width="768" height="400" class="columnChart"></svg>
+    <div id="barWrap">
+       
+        <svg width="960" height="600" class="barChart"><text id=leftLabel>Aantal respondenten in %</text></svg>
+        <p class="bottomLabel">Rapportcijfer vertrouwen in politie</p>
+        <div id="barChartLegend">
+            <div id="leftLegend"> Nederlanders met westerse migratieachtergrond </div>
+           <div id="rightLegend"> Nederlanders met niet-westerse migratieachtergrond </div>
+        </div>
+    </div>
+    <div class="black-bar yellow-text">
+            <h2>Wat vinden respondenten van de stelling:<br> "De politie was <span class="underline">beleefd</span> gedurende het contact"</h2>
+            <div class="insight">
+                <div id="value3">0%</div>
+                <p>is het hiermee oneens</p>
+            </div>
+            <div class="insight">
+                <div id="value4">0%</div>
+                <p>staat hier neutraal</p>
+            </div>
+            <div class="insight">
+                <div id="value5">0%</div>
+                <p>is het hiermee eens</p>
+            </div>
+            <p class="softIta">* In totaal zijn er 716 respondenten in contact geweest met de politie.</p>
+    </div>
+        <div class="visualisation">
+            <h2>Correlatie tussen opleidingsniveau en het contact verloop.</h2>
+            <p class="softIta">Een samenhangend verband tussen het laatst afgeronde opleidingsniveau van respondenten en het verloop van de contact op basis van de beleefdheid van de politie.</p>
+        </div>
+    <svg width="960" height="600" class="columnChart"></svg>
+    <footer>
+        <p class="boldYellow"> Gemaakt door Sajjad Ali, Jennifer Salgt & Ramon Meijers</p>
+    </footer>
 
     <script src="./scripts/main.js"></script>
 </body>

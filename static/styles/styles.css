@@ -5,7 +5,17 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: url("../fonts/Roboto/Roboto-Black.ttf");
+  src: url("../fonts/Roboto/Roboto-Medium.ttf");
+}
+
+@font-face {
+  font-family: 'Roboto-light';
+  src: url("../fonts/Roboto/Roboto-Light.ttf");
+}
+
+@font-face {
+  font-family: 'Roboto-light-Italic';
+  src: url("../fonts/Roboto/Roboto-LightItalic.ttf");
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -15,6 +25,141 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   font-family: 'Roboto';
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.softIta {
+  font-family: "Roboto-light-Italic";
+}
+
+nav button {
+  border: solid 1px white;
+  background: black;
+  color: white;
+  font-family: "Roboto";
+  padding: 2px 5px;
+  font-size: 16px;
+  -webkit-transition: .3s;
+  transition: .3s;
+  margin: 0 5px;
+}
+
+nav button:hover {
+  cursor: pointer;
+  background: #fbea6a;
+  opacity: .6;
+  color: #000;
+  border-color: #fbea6a;
+}
+
+nav button.active {
+  background: #fbea6a;
+  color: #000;
+  border-color: #fbea6a;
+}
+
+.centerCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: left;
+}
+
+.centerCenter p {
+  font-size: 20px;
+}
+
+footer {
+  background-image: url("../img/footerDark.png");
+  height: 250px;
+  padding: 20px 0;
+}
+
+.boldYellow {
+  font-size: 20px;
+  color: #fbea6a;
+}
+
+.visualisation {
+  text-align: left;
+  display: block;
+  margin: auto;
+  max-width: 50%;
+}
+
+#barWrap {
+  width: 100%;
+}
+
+#barWrap .barChart {
+  position: relative;
+  margin-top: 5%;
+}
+
+#leftLabel {
+  position: absolute;
+  fill: #fff;
+  -webkit-transform: translate(15px, 70%) rotate(-90deg);
+          transform: translate(15px, 70%) rotate(-90deg);
+  font-size: 22px;
+  font-family: "Roboto";
+}
+
+.bottomLabel {
+  font-size: 22px;
+  font-family: "Roboto";
+  margin: 0;
+}
+
+#barChartLegend {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 70%;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  font-family: "Roboto-light";
+  margin: auto;
+  padding-top: 20px;
+}
+
+#barChartLegend div {
+  padding: 0 10px;
+  position: relative;
+}
+
+#barChartLegend #leftLegend {
+  color: #db393c;
+}
+
+#barChartLegend #leftLegend::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: #db393c;
+  position: absolute;
+  left: -20px;
+  border-radius: 2px;
+}
+
+#barChartLegend #rightLegend {
+  color: #0f4ff4;
+}
+
+#barChartLegend #rightLegend::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: #0f4ff4;
+  position: absolute;
+  left: -20px;
+  border-radius: 2px;
 }
 
 .axis path,
@@ -79,6 +224,15 @@ rect:hover {
   cursor: pointer;
 }
 
+.tick {
+  font-size: 20px;
+  font-family: "Roboto";
+}
+
+.columnChart {
+  font-size: 15px;
+}
+
 html, body {
   margin: 0;
   background: #000;
@@ -91,21 +245,46 @@ html, body {
   display: block;
   -webkit-transform: scale(0.8);
           transform: scale(0.8);
+  padding: 30px 0;
+}
+
+#amsterdamLogo {
+  left: 50%;
+  -webkit-transform: translate(-50%, -20%) scale(0.5);
+          transform: translate(-50%, -20%) scale(0.5);
+  position: relative;
 }
 
 #introduction {
   font-family: 'Roboto';
-  padding: 30px 0;
   background-image: url("../img/control alt delete achtergrond.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  margin: 80px 0;
+  height: 80vh;
 }
 
 .yellow-bar {
-  background-color: #fff33d;
-  color: #000;
+  background-color: #fbea6a;
+  color: black;
+  margin: 0 20%;
+  padding: 40px 50px;
+  font-family: 'Roboto';
+  font-size: 20px;
+  text-align: left;
+  -webkit-transform: translateY(-20%);
+          transform: translateY(-20%);
+}
+
+.yellow-bar .invert {
+  background-color: black;
+  color: #fbea6a;
+  padding: 2px;
+}
+
+.black-bar {
+  background-color: #000;
+  color: #fff;
   margin: 0 20%;
   padding: 30px 20px;
   display: -webkit-box;
@@ -118,20 +297,44 @@ html, body {
           justify-content: center;
 }
 
-.yellow-bar h2 {
+.black-bar.yellow-text .insight {
+  color: #fbea6a;
+}
+
+.black-bar h2 {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 100%;
           flex: 0 0 100%;
 }
 
-.yellow-bar .insight {
+.black-bar .insight {
   padding: 0 20px;
   font-family: 'Roboto';
   font-size: 30px;
 }
 
-.yellow-bar .insight p {
+.black-bar .insight p {
   font-size: 22px;
   font-weight: 400;
+}
+
+.black-bar .insight div {
+  font-size: 60px;
+}
+
+.black-bar #value1 {
+  color: #ee1f33;
+}
+
+.black-bar #value2 {
+  color: #0048ff;
+}
+
+.black-bar #valRed {
+  color: #ee1f33;
+}
+
+.black-bar #valBlue {
+  color: #0048ff;
 }
 /*# sourceMappingURL=styles.css.map */

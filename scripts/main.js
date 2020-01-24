@@ -14,7 +14,8 @@ const rawdata = require('../input/rawdata.json');
 const chartData = cleanChartData(rawdata);
 // const groupedData = restructureData(chartData);
 
-const margin = ({top: 10, right: 10, bottom: 20, left: 40})
+
+const margin = ({top: 10, right: 10, bottom: 35, left: 70})
 const height = 600;
 const width= 960;
 const keys = ["westers", "niet-westers"];
@@ -36,7 +37,8 @@ const bar_x1 = d3.scaleBand()
 
 const y2 = d3.scaleLinear()
     .domain([0, 50]).nice()
-    .rangeRound([height - margin.bottom, margin.top])
+    .rangeRound([height - margin.bottom, margin.top]);
+
 
 const xAxis = g => g
     .attr("transform", `translate(0,${height - margin.bottom})`)
@@ -55,6 +57,7 @@ const yAxis = g => g
         
             
     restructureData(chartData)
+
 
     function update(data){
         const datapointToolTip = d3.tip().attr('class', 'd3-tip').html(function (d) {
@@ -100,7 +103,12 @@ const yAxis = g => g
 
         const menu = d3.select('nav');
         menu.on("click", ()=>{
-            console.log(event.target.dataset.finance)
+            // console.log(event.target.dataset.finance)
+
+            menu.selectAll("button")
+                .classed('active', false)
+
+                event.target.classList.add("active");
             if(event.target.dataset.finance == 7){
                 restructureData(chartData);
             }
@@ -117,7 +125,7 @@ const yAxis = g => g
         svg.append("g")
             .call(yAxis);
 
-            svg.call(datapointToolTip)
+        svg.call(datapointToolTip)
 
 }
     const legend = svg => {
@@ -142,8 +150,9 @@ const yAxis = g => g
             .attr("dy", "0.35em")
             .text(d => d);
       }
-    svg.append("g")
-    .call(legend);
+        svg.append("g")
+            .call(legend);
+
     function restructureData(data){
         const sortOrigin = d3.nest()
             .key(d => d.Herkomst)
@@ -203,6 +212,12 @@ function cleanChartData(data){
         }
     })
 }
+
+animateInsight("value1", 0, 9.6, 4000);
+animateInsight("value2", 0, 24.29, 4000);
+animateInsight("value3", 0, 20.4, 4000);
+animateInsight("value4", 0, 14, 4000);
+animateInsight("value5", 0, 65.6, 4000);
 //this functions handels the countup on the one page
 function animateInsight(id, start, end, duration){
     let object = document.getElementById(id);
@@ -216,7 +231,7 @@ function animateInsight(id, start, end, duration){
     function run(){
         let now = new Date().getTime();
         let remaining = Math.max((endTime - now)/duration, 0);
-        let value = Math.round(end - (remaining * range));
+        let value = Math.round((end - (remaining * range)) * 10) / 10 ;
         object.innerHTML = value + "%";
         if(value == end){
             clearInterval(Timer);
@@ -311,7 +326,7 @@ g.append("g")
     .attr("text-anchor", "start")
           .style("font-size", "20px")
           .attr("font-style", "italic")
-          .attr("transform", "translate(210,320)")
+          .attr("transform", "translate(210,500)")
     .text("\"De politie was beleefd gedurende het contact.\"");
 
 var legend = g.append("g")
