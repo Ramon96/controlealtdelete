@@ -1,7 +1,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8f83d5fe-b6d7-48a2-8e22-176f274ba90b/deploy-status)](https://app.netlify.com/sites/controlealtdelete/deploys)
 
 # Controle alt delete - Etnisch profileren
-_hier komt een demo video_
+[!barChart](https://github.com/Ramon96/controlealtdelete/blob/master/static/img/chart.png)
 
 # link to live demo
 [Demo](https://controlealtdelete.netlify.com/)
